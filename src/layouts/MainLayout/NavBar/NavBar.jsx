@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReadOnRouteLogo from "../../../assets/Logo/ReadOnRouteLogo";
+import ReadOnRouteLogo from "../../../Components/Logo/ReadOnRouteLogo";
 import { NavLink } from "react-router";
 
 const NavBar = () => {
@@ -51,7 +51,7 @@ const NavBar = () => {
           </div>
           <ul
             tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-300 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content  bg-base-200 rounded-box z-20 mt-3 w-52 p-2 shadow"
           >
             {links}
           </ul>
@@ -95,7 +95,7 @@ const NavBar = () => {
           </svg>
         </label>
         
-        <a className="btn bg-primary text-white">Login</a>
+        <a className="btn bg-primary hover:bg-secondary-content text-white">Login</a>
       </div>
     </div>
   );
