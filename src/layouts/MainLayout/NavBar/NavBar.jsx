@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReadOnRouteLogo from "../../../Components/Logo/ReadOnRouteLogo";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const NavBar = () => {
   const [theme, setTheme] = useState(
@@ -29,7 +29,7 @@ const NavBar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-sm rounded-2xl px-5">
       <div className="navbar-start">
         <div className="dropdown ">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -95,7 +95,7 @@ const NavBar = () => {
           </svg>
         </label>
         
-        <a className="btn bg-primary hover:bg-secondary-content text-white">Login</a>
+        <Link to={'/login'} className="btn bg-primary hover:bg-secondary-content text-white">Login</Link>
       </div>
     </div>
   );
