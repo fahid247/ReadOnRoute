@@ -13,9 +13,10 @@ import { Autoplay } from 'swiper/modules'
 // Import required modules
 import { Pagination, Navigation } from "swiper/modules";
 import { ParallaxBanner, ParallaxProvider } from "react-scroll-parallax";
+import { useNavigate } from "react-router";
 
 const Banner = () => {
-   
+   const navigate = useNavigate();
   return (
     <ParallaxProvider>
       <div className=" py-8 ">
@@ -54,8 +55,8 @@ const Banner = () => {
                               Order, track, and return books from your favorite
                               libraries — all from one platform.
                             </h4>
-                            <button className="bg-secondary-content  hover:bg-primary cursor-pointer text-white font-semibold px-6 py-3 rounded-full mt-5 transition">
-                              Order Now
+                            <button onClick={()=>{navigate('/allbooks')}} className="bg-secondary-content  hover:bg-primary cursor-pointer text-white font-semibold px-6 py-3 rounded-full mt-5 transition">
+                              All Books
                             </button>
                           </div>
                         </div>

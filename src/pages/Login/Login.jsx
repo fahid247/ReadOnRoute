@@ -2,12 +2,60 @@ import React from "react";
 import image from "../../assets/Screenshot 2025-12-17 113021.png";
 import { useForm } from "react-hook-form";
 import ReadOnRouteLogo from "../../Components/Logo/ReadOnRouteLogo";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../Hooks/UseAuth";
+import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 
 const Login = () => {
-    const {signInUser}= useAuth();
-    const navigate = useNavigate()
+  const { signInGoogle ,updateUserProfile } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const location = useLocation();
+
+  const handleGoogleSignIn = () => {
+    signInGoogle()
+      .then((result) => {
+        console.log(result.user.photoURL);
+
+        // create user in the database
+        const userInfo = {
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+        };
+
+        axiosSecure.post("/users", userInfo).then((res) => {
+          console.log("user data has been stored", res.data);
+          
+        });
+
+
+
+         const userProfile = {
+                            photoURL: result.user.photoURL 
+                        }
+
+                        updateUserProfile(userProfile)
+                            .then(() => {
+                                // console.log('user profile updated done.')
+                                navigate(location.state || '/');
+                            })
+                            .catch(error => console.log(error))
+
+
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+     
+
+
+  };
+
+  const { signInUser } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -16,14 +64,14 @@ const Login = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    signInUser(data.email,data.password)
-    .then((result)=>{
-        console.log(result.user)
-        navigate('/')
-    })
-    .catch((error)=>{
-        console.log(error)
-    })
+    signInUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="flex">
@@ -102,7 +150,7 @@ const Login = () => {
               <button className="btn btn-primary w-full mt-4">Sign In</button>
             </form>
 
-            <button className="btn w-full mt-4 bg-white text-black border-[#cfcbcb]">
+            <button onClick={handleGoogleSignIn} className="btn w-full mt-4 bg-white text-black border-[#cfcbcb]">
               <svg
                 aria-label="Google logo"
                 width="16"
@@ -136,7 +184,10 @@ const Login = () => {
             {/* Footer */}
             <p className="text-sm text-center mt-4">
               Don't have an account?{" "}
-              <Link to={'/register'} className="text-primary font-medium hover:underline">
+              <Link
+                to={"/register"}
+                className="text-primary font-medium hover:underline"
+              >
                 Sign Up
               </Link>
             </p>

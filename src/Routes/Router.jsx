@@ -3,6 +3,14 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import MyProfile from "../pages/MyProfile/MyProfile";
+import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
+import DashHome from "../Dashbord/DashHome/DashHome";
+import PrivateRoute from "./PrivateRoute";
+import UpdateProfile from "../pages/UpdateProfile/UpdateProfile";
+import AllBooks from "../pages/AllBooks/AllBooks";
+import BookDetails from "../pages/BookDetails/BookDetails";
+import MyOrders from "../pages/MyOrders/MyOrders";
 
 export const router = createBrowserRouter([
     {
@@ -12,6 +20,14 @@ export const router = createBrowserRouter([
             {
                 index:true,
                 Component: Home
+            },
+            {
+                path:'/allbooks',
+                Component: AllBooks
+            },
+            {
+                path:'/book-details/:id',
+                element: <PrivateRoute><BookDetails></BookDetails></PrivateRoute>
             }
         ]
     },
@@ -22,5 +38,27 @@ export const router = createBrowserRouter([
     {
         path:'/register',
         Component: Register
+    },
+    {
+        path:'/dashboard',
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        children:[
+            {
+                index:true,
+                Component:DashHome
+            },
+            {
+                path:'/dashboard/my-profile',
+                Component: MyProfile
+            },
+            {
+                path:'/dashboard/update-profile',
+                Component: UpdateProfile
+            },
+            {
+                path:'/dashboard/my-orders',
+                Component: MyOrders
+            }
+        ]
     }
 ])

@@ -8,7 +8,7 @@ import axios from "axios";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 
 const Register = () => {
-  const { registerUser, updateUserProfile } = useAuth();
+  const { registerUser, updateUserProfile , signInGoogle} = useAuth();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
@@ -17,6 +17,52 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+
+  const handleGoogleSignIn = () => {
+    signInGoogle()
+      .then((result) => {
+        console.log(result.user.photoURL);
+
+        // create user in the database
+        const userInfo = {
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+        };
+
+        axiosSecure.post("/users", userInfo).then((res) => {
+          console.log("user data has been stored", res.data);
+          
+        });
+
+
+
+         const userProfile = {
+                            photoURL: result.user.photoURL 
+                        }
+
+                        updateUserProfile(userProfile)
+                            .then(() => {
+                                // console.log('user profile updated done.')
+                                navigate(location.state || '/');
+                            })
+                            .catch(error => console.log(error))
+
+
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+     
+
+
+  };
+
+
 
   const handleRegistration = (data) => {
 
@@ -160,7 +206,7 @@ const Register = () => {
               <button className="btn btn-primary w-full ">Sign Up</button>
             </form>
 
-            <button className="btn w-full mt-4 bg-white text-black border-[#cfcbcb]">
+            <button onClick={handleGoogleSignIn} className="btn w-full mt-4 bg-white text-black border-[#cfcbcb]">
               <svg
                 aria-label="Google logo"
                 width="16"
