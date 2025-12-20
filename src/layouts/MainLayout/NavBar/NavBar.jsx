@@ -35,10 +35,10 @@ const NavBar = () => {
   const links = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink to={'/'}>Home</NavLink>
       </li>
       <li>
-        <NavLink>Books</NavLink>
+        <NavLink to={'/allbooks'}>Books</NavLink>
       </li>
       {user && (
         <>

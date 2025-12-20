@@ -45,7 +45,7 @@ const BookDetails = () => {
 
     document.getElementById("order_modal").close();
 
-    navigate('/allbooks')
+    navigate('/dashboard/my-orders')
 
   };
 

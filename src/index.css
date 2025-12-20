@@ -46,3 +46,9 @@
   --color-error:#EF4444;
   --color-error-content:#FEE2E2;
 }
+
+ul a.active {
+    color: #4F46E5;
+    
+    font-weight: bold;
+}

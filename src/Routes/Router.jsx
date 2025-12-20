@@ -3,14 +3,18 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import MyProfile from "../pages/MyProfile/MyProfile";
+import MyProfile from "../Dashbord/MyProfile/MyProfile";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import DashHome from "../Dashbord/DashHome/DashHome";
 import PrivateRoute from "./PrivateRoute";
-import UpdateProfile from "../pages/UpdateProfile/UpdateProfile";
+import UpdateProfile from "../Dashbord/UpdateProfile/UpdateProfile";
 import AllBooks from "../pages/AllBooks/AllBooks";
 import BookDetails from "../pages/BookDetails/BookDetails";
-import MyOrders from "../pages/MyOrders/MyOrders";
+import MyOrders from "../Dashbord/MyOrders/MyOrders";
+import Payment from "../Dashbord/Payment/Payment";
+import PaymentSuccess from "../Dashbord/Payment/PaymentSuccess";
+import PaymentCancelled from "../Dashbord/Payment/PaymentCancelled";
+import PaymentHistory from "../Dashbord/Payment/PaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -58,6 +62,22 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/my-orders',
                 Component: MyOrders
+            },
+            {
+                path:'/dashboard/payment/:orderId',
+                Component: Payment
+            },
+            {
+                path:'/dashboard/payment-success',
+                Component:PaymentSuccess
+            },
+            {
+                path:'/dashboard/payment-cancelled',
+                Component:PaymentCancelled
+            },
+            {
+                path:'/dashboard/my-paymentHistory',
+                Component: PaymentHistory
             }
         ]
     }
