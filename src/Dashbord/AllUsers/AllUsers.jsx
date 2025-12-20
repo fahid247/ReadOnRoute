@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
+import Loading from "../../Components/Loading/Loading";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -26,7 +27,7 @@ const AllUsers = () => {
   });
 
   if (isLoading) {
-    return <div className="text-center py-10">Loading users...</div>;
+    return <Loading></Loading>;
   }
 
   return (

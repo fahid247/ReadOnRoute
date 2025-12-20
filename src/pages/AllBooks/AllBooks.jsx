@@ -1,25 +1,36 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { useNavigate } from "react-router";
+import useAuth from "../../Hooks/UseAuth";
+import Loading from "../../Components/Loading/Loading";
 
 
 const AllBooks = () => {
     const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+  const {user,loading} = useAuth();
 
-    const {data:books=[]}=useQuery({
+    const {data:books=[],isLoading}=useQuery({
         queryKey:['AllBooks'],
+        enabled:!!user,
         queryFn: async () =>{
             const res  = await axiosSecure.get('/AllBooks')
             return res.data;
         }
     })
+
+    if (loading || isLoading) {
+        return <Loading></Loading>
+    }
+
+    console.log(user.role)
+
   return (
     <section className="py-16 bg-base-300 min-h-screen">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-          All Books
-        </h2>
+        <div className="text-3xl font-bold text-gray-800 mb-8 text-center">
+          {user.role === "librarian"?<p>My Books</p>:<p>All Books</p>}
+        </div>
 
         <div className="flex justify-center mb-10 max-w-md mx-auto">
           <input
@@ -47,7 +58,7 @@ const AllBooks = () => {
                   <img
                     src={book.image}
                     alt={book.name}
-                    className="w-full h-48 object-cover    "
+                    className="w-full h-48 object-cover"
                   />
                   <div className="p-5">
                     <h3 className="text-xl font-semibold mb-1">{book.name}</h3>

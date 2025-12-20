@@ -3,6 +3,7 @@ import useAuth from "../../Hooks/UseAuth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { Link } from "react-router";
+import Loading from "../../Components/Loading/Loading";
 
 const MyOrders = () => {
   const { user } = useAuth();
@@ -28,7 +29,7 @@ const MyOrders = () => {
   });
 
   if (isLoading) {
-    return <p className="text-center py-20">Loading...</p>;
+    return <Loading></Loading>;
   }
   return (
     <section className="py-16 bg-base-200 min-h-screen">

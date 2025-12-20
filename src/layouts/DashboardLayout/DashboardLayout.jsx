@@ -1,6 +1,8 @@
 import React from "react";
+import { BiBookAdd } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FaParachuteBox, FaUsers } from "react-icons/fa";
+import { ImBooks } from "react-icons/im";
 import { MdOutlinePayment } from "react-icons/md";
 import { RiContactsBook2Fill } from "react-icons/ri";
 import { Link, NavLink, Outlet } from "react-router";
@@ -130,6 +132,28 @@ const DashboardLayout = () => {
               > 
                 <RiContactsBook2Fill />
                 <span className="is-drawer-close:hidden">Manage Books</span>
+              </NavLink>
+              
+            </li>
+            <li>
+              <NavLink
+                to={'/dashboard/addBooks'}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Add Books"
+              > 
+                <BiBookAdd />
+                <span className="is-drawer-close:hidden">Add Books</span>
+              </NavLink>
+              
+            </li>
+            <li>
+              <NavLink
+                to={'/dashboard/myBooks'}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="My Books"
+              > 
+                <ImBooks />
+                <span className="is-drawer-close:hidden">My Books</span>
               </NavLink>
               
             </li>

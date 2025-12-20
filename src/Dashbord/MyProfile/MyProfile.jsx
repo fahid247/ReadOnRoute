@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import useAuth from "../../Hooks/UseAuth";
+import Loading from "../../Components/Loading/Loading";
 
 const MyProfile = () => {
   const { user, loading } = useAuth();
@@ -8,11 +9,7 @@ const MyProfile = () => {
   console.log(user);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-spinner text-primary"></span>
-      </div>
-    );
+    return <Loading></Loading>
   }
 
   if (!user) {

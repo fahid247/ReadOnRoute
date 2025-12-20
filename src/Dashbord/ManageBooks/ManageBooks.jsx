@@ -2,21 +2,29 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
+import useAuth from "../../Hooks/UseAuth";
+import Loading from "../../Components/Loading/Loading";
 
 const ManageBooks = () => {
   const axiosSecure = useAxiosSecure();
 
-  const {
-    data: books = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["all-books"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/AllBooks");
-      return res.data;
-    },
-  });
+  const { user } = useAuth();
+
+const {
+  data: books = [],
+  isLoading,
+  refetch,
+} = useQuery({
+  queryKey: ["all-books", user?.email],
+  enabled: !!user?.email,
+  queryFn: async () => {
+    const res = await axiosSecure.get(
+      `/AllBooks?librarianEmail=${user.email}`
+    );
+    return res.data;
+  },
+});
+
 
   // Publish / Unpublish
   const handlePublishToggle = async (id, currentStatus) => {
@@ -49,7 +57,7 @@ const ManageBooks = () => {
   };
 
   if (isLoading) {
-    return <div className="text-center py-10">Loading...</div>;
+    return <Loading></Loading>;
   }
 
   return (
@@ -67,7 +75,7 @@ const ManageBooks = () => {
               <th>#</th>
               <th>Book</th>
               <th>Author</th>
-              <th>Librarian</th>
+              <th>Librarian Email</th>
               <th>Status</th>
               <th className="text-center">Actions</th>
             </tr>

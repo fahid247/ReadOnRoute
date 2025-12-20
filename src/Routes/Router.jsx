@@ -17,6 +17,9 @@ import PaymentCancelled from "../Dashbord/Payment/PaymentCancelled";
 import PaymentHistory from "../Dashbord/Payment/PaymentHistory";
 import AllUsers from "../Dashbord/AllUsers/AllUsers";
 import ManageBooks from "../Dashbord/ManageBooks/ManageBooks";
+import AddBooks from "../Dashbord/AddBooks/AddBooks";
+import MyBooks from "../Dashbord/MyBooks/MyBooks";
+import EditBook from "../Dashbord/EditBook/EditBook";
 
 export const router = createBrowserRouter([
     {
@@ -88,6 +91,18 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/manageBooks',
                 Component:ManageBooks
+            },
+            {
+                path:'/dashboard/addBooks',
+                Component: AddBooks
+            },
+            {
+                path:'/dashboard/myBooks',
+                Component:MyBooks
+            },
+            {
+                path:'/dashboard/edit-book/:id',
+                Component:EditBook
             }
         ]
     }
