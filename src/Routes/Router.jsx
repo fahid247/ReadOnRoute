@@ -21,6 +21,7 @@ import AddBooks from "../Dashbord/AddBooks/AddBooks";
 import MyBooks from "../Dashbord/MyBooks/MyBooks";
 import EditBook from "../Dashbord/EditBook/EditBook";
 import LibrarianOrders from "../Dashbord/LibrarianOrders/LibrarianOrders";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -87,11 +88,11 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/AllUsers',
-                Component: AllUsers
+                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path:'/dashboard/manageBooks',
-                Component:ManageBooks
+                element:<AdminRoute><ManageBooks></ManageBooks></AdminRoute>
             },
             {
                 path:'/dashboard/addBooks',

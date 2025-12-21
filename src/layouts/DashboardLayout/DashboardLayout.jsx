@@ -7,6 +7,7 @@ import { MdOutlinePayment } from "react-icons/md";
 import { RiContactsBook2Fill } from "react-icons/ri";
 import { Link, NavLink, Outlet } from "react-router";
 import UseRole from "../../Hooks/UseRole";
+import { FaBookBookmark } from "react-icons/fa6";
 
 const DashboardLayout = () => {
   const { role } = UseRole();
@@ -38,7 +39,29 @@ const DashboardLayout = () => {
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-          <div className="px-4">Navbar Title</div>
+          <div className="px-4">
+            {role === "user" && (
+              <>
+                <h1 className="text-primary  text-[clamp(2rem,3.5vw,3.75rem)] font-bold">
+                  User Dashboard
+                </h1>
+              </>
+            )}
+            {role === "librarian" && (
+              <>
+                <h1 className="text-primary  text-[clamp(2rem,3.5vw,3.75rem)] font-bold">
+                  Librarian Dashboard
+                </h1>
+              </>
+            )}
+            {role === "admin" && (
+              <>
+                <h1 className="text-primary text-[clamp(2rem,3.5vw,3.75rem)] font-bold">
+                  Admin Dashboard
+                </h1>
+              </>
+            )}
+          </div>
         </nav>
         {/* Page content here */}
         <Outlet></Outlet>
@@ -174,7 +197,7 @@ const DashboardLayout = () => {
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                     data-tip="Librarian Orders"
                   >
-                    <ImBooks />
+                    <FaBookBookmark />
                     <span className="is-drawer-close:hidden">
                       Librarian Orders
                     </span>
