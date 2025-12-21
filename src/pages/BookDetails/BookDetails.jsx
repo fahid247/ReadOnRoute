@@ -33,6 +33,7 @@ const BookDetails = () => {
       orderStatus: "pending",
       paymentStatus: "unpaid",
       orderedAt: new Date(),
+      librarianEmail: book.librarianEmail,
     };
 
     Swal.fire({

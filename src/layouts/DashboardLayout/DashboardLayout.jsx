@@ -6,8 +6,11 @@ import { ImBooks } from "react-icons/im";
 import { MdOutlinePayment } from "react-icons/md";
 import { RiContactsBook2Fill } from "react-icons/ri";
 import { Link, NavLink, Outlet } from "react-router";
+import UseRole from "../../Hooks/UseRole";
 
 const DashboardLayout = () => {
+  const { role } = UseRole();
+  console.log(role);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -78,85 +81,107 @@ const DashboardLayout = () => {
 
             <li>
               <NavLink
-                to={"/dashboard/my-orders"}
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="My orders"
-              > 
-                <FaParachuteBox />
-                <span className="is-drawer-close:hidden">My orders</span>
-              </NavLink>
-              
-              
-            </li>
-
-            <li>
-              <NavLink
                 to={"/dashboard/my-profile"}
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="My profile"
-              > 
+              >
                 <CgProfile />
                 <span className="is-drawer-close:hidden">My profile</span>
               </NavLink>
-              
-              
             </li>
-            <li>
-              <NavLink
-                to={"/dashboard/my-paymentHistory"}
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Payment History"
-              > 
-                <MdOutlinePayment/>
-                <span className="is-drawer-close:hidden">Payment History</span>
-              </NavLink>
-              
-              
-            </li>
-            <li>
-              <NavLink
-                to={"/dashboard/AllUsers"}
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="All Users"
-              > 
-                <FaUsers />
-                <span className="is-drawer-close:hidden">All Users</span>
-              </NavLink>
-              
-            </li>
-            <li>
-              <NavLink
-                to={'/dashboard/manageBooks'}
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Manage Books"
-              > 
-                <RiContactsBook2Fill />
-                <span className="is-drawer-close:hidden">Manage Books</span>
-              </NavLink>
-              
-            </li>
-            <li>
-              <NavLink
-                to={'/dashboard/addBooks'}
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Add Books"
-              > 
-                <BiBookAdd />
-                <span className="is-drawer-close:hidden">Add Books</span>
-              </NavLink>
-              
-            </li>
-            <li>
-              <NavLink
-                to={'/dashboard/myBooks'}
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="My Books"
-              > 
-                <ImBooks />
-                <span className="is-drawer-close:hidden">My Books</span>
-              </NavLink>
-              
-            </li>
+
+            {role === "user" && (
+              <>
+                <li>
+                  <NavLink
+                    to={"/dashboard/my-orders"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="My orders"
+                  >
+                    <FaParachuteBox />
+                    <span className="is-drawer-close:hidden">My orders</span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to={"/dashboard/my-paymentHistory"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Payment History"
+                  >
+                    <MdOutlinePayment />
+                    <span className="is-drawer-close:hidden">
+                      Payment History
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to={"/dashboard/manageBooks"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Manage Books"
+                  >
+                    <RiContactsBook2Fill />
+                    <span className="is-drawer-close:hidden">Manage Books</span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to={"/dashboard/AllUsers"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="All Users"
+                  >
+                    <FaUsers />
+                    <span className="is-drawer-close:hidden">All Users</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {role === "librarian" && (
+              <>
+                <li>
+                  <NavLink
+                    to={"/dashboard/addBooks"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Add Books"
+                  >
+                    <BiBookAdd />
+                    <span className="is-drawer-close:hidden">Add Books</span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to={"/dashboard/myBooks"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="My Books"
+                  >
+                    <ImBooks />
+                    <span className="is-drawer-close:hidden">My Books</span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to={"/dashboard/librarianOrders"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Librarian Orders"
+                  >
+                    <ImBooks />
+                    <span className="is-drawer-close:hidden">
+                      Librarian Orders
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {/* List item */}
             <li>

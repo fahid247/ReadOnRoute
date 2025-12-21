@@ -20,6 +20,7 @@ import ManageBooks from "../Dashbord/ManageBooks/ManageBooks";
 import AddBooks from "../Dashbord/AddBooks/AddBooks";
 import MyBooks from "../Dashbord/MyBooks/MyBooks";
 import EditBook from "../Dashbord/EditBook/EditBook";
+import LibrarianOrders from "../Dashbord/LibrarianOrders/LibrarianOrders";
 
 export const router = createBrowserRouter([
     {
@@ -103,6 +104,10 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/edit-book/:id',
                 Component:EditBook
+            },
+            {
+                path:'/dashboard/librarianOrders',
+                Component:LibrarianOrders
             }
         ]
     }

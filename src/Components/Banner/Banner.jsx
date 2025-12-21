@@ -90,8 +90,8 @@ const Banner = () => {
                               Access academic and general books from trusted libraries
                     without travel or waiting lines.
                             </h4>
-                            <button className="bg-secondary-content  hover:bg-primary cursor-pointer text-white font-semibold px-6 py-3 rounded-full mt-5 transition">
-                              explore more
+                            <button onClick={()=>{navigate('/allbooks')}} className="bg-secondary-content  hover:bg-primary cursor-pointer text-white font-semibold px-6 py-3 rounded-full mt-5 transition">
+                              All Books
                             </button>
                           </div>
                         </div>
@@ -124,8 +124,8 @@ const Banner = () => {
                             <h4 className="text-[#E5E7EB] text-sm sm:text-lg md:text-xl font-bold animate__animated animate__fadeInUp w-2/3 mx-auto mt-5">
                                Manage books, track orders, and serve readers efficiently through BookCourier.
                             </h4>
-                            <button className="bg-secondary-content  hover:bg-primary cursor-pointer text-white font-semibold px-6 py-3 rounded-full mt-5 transition">
-                             Become a Librarian
+                            <button onClick={()=>{navigate('/allbooks')}} className="bg-secondary-content  hover:bg-primary cursor-pointer text-white font-semibold px-6 py-3 rounded-full mt-5 transition">
+                              All Books
                             </button>
                           </div>
                         </div>
