@@ -30,7 +30,7 @@ const Banner = () => {
             navigation={true}
             
             modules={[Pagination, Navigation,Autoplay]}
-            className="w-full h-full"
+            className="w-full h-full "
           >
             <SwiperSlide>
               <div className="relative w-full h-full">

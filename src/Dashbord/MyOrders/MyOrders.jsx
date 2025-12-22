@@ -57,7 +57,9 @@ const MyOrders = () => {
   return (
     <section className="py-16 bg-base-200 min-h-screen">
       <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl font-bold text-center mb-10">My Orders</h2>
+        <h2 className="text-4xl text-primary my-8 underline font-bold  text-center">
+        <span className="text-base-content">My</span>  <span className="text-base-content">Orders</span>
+      </h2>
 
         {orders.length === 0 ? (
           <p className="text-center">You have no orders yet.</p>

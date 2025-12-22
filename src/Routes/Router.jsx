@@ -22,6 +22,7 @@ import MyBooks from "../Dashbord/MyBooks/MyBooks";
 import EditBook from "../Dashbord/EditBook/EditBook";
 import LibrarianOrders from "../Dashbord/LibrarianOrders/LibrarianOrders";
 import AdminRoute from "./AdminRoute";
+import MyWishList from "../Dashbord/MyWishList/MyWishList";
 
 export const router = createBrowserRouter([
     {
@@ -109,6 +110,10 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/librarianOrders',
                 Component:LibrarianOrders
+            },
+            {
+                path:'/dashboard/my-myWishList',
+                Component: MyWishList
             }
         ]
     }

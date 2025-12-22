@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import useAuth from "../../Hooks/UseAuth";
 import Swal from "sweetalert2";
+import { FaHeart } from "react-icons/fa";
+import { BookImage } from "lucide-react";
 
 const BookDetails = () => {
     const navigate = useNavigate();
@@ -49,6 +51,32 @@ const BookDetails = () => {
     navigate('/dashboard/my-orders')
 
   };
+  const handleWishList = async (e) => {
+    e.preventDefault();
+    const wishInfo = {
+      bookId: book._id,
+      BookImage:book.image,
+      bookName: book.name,
+      price: book.price,
+      name: user.displayName,
+      email: user.email,
+      wishedAt: new Date(),
+      librarianEmail: book.librarianEmail,
+    };
+
+    Swal.fire({
+  title: "Added to wishlist",
+  icon: "success",
+  draggable: true
+});
+
+    await axiosSecure.post("/wishList", wishInfo);
+
+    document.getElementById("wish_modal").close();
+
+    navigate('/dashboard/my-orders')
+
+  };
 
   if (isLoading) return <p className="text-center py-20">Loading...</p>;
 
@@ -78,12 +106,21 @@ const BookDetails = () => {
 
           <p className="text-xl font-semibold mt-6">Price: ৳{book.price}</p>
 
-          <button
+          <div className="flex gap-2">
+            <button
             className="btn btn-primary mt-6"
             onClick={() => document.getElementById("order_modal").showModal()}
           >
             Order Now
           </button>
+
+          <button
+            className="btn btn-primary border-none bg-pink-500 mt-6"
+            onClick={() => document.getElementById("wish_modal").showModal()}
+          >
+            Add to Wish List <FaHeart />
+          </button>
+          </div>
         </div>
       </div>
 
@@ -127,6 +164,39 @@ const BookDetails = () => {
                 type="button"
                 className="btn"
                 onClick={() => document.getElementById("order_modal").close()}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+      {/* Wish Modal */}
+      <dialog id="wish_modal" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg mb-4">Make your wish list</h3>
+
+          <form onSubmit={handleWishList} className="space-y-3">
+            <input
+              type="text"
+              readOnly
+              value={user?.displayName || ""}
+              className="input input-bordered w-full"
+            />
+            <input
+              type="email"
+              readOnly
+              value={user?.email || ""}
+              className="input input-bordered w-full"
+            />
+            <div className="modal-action">
+              <button type="submit" className="btn btn-primary bg-pink-500">
+                Add to Wish List
+              </button>
+              <button
+                type="button"
+                className="btn"
+                onClick={() => document.getElementById("wish_modal").close()}
               >
                 Cancel
               </button>

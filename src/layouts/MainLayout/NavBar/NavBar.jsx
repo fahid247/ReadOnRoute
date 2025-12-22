@@ -3,15 +3,28 @@ import ReadOnRouteLogo from "../../../Components/Logo/ReadOnRouteLogo";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../../Hooks/UseAuth";
 import { FaUserCircle } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
 
   const handleLogOut = () => {
     logOut()
-      .then()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logged out successfully!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      })
       .catch((error) => {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Logout failed",
+          text: error.message,
+        });
       });
   };
 
@@ -35,17 +48,16 @@ const NavBar = () => {
   const links = (
     <>
       <li>
-        <NavLink to={'/'}>Home</NavLink>
+        <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={'/allbooks'}>Books</NavLink>
+        <NavLink to={"/allbooks"}>Books</NavLink>
       </li>
       {user && (
         <>
           <li>
             <NavLink to={"/dashboard"}>Dashboard</NavLink>
           </li>
-          
         </>
       )}
     </>
@@ -63,51 +75,45 @@ const NavBar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
+              />
             </svg>
           </div>
           <ul
             tabIndex="-1"
-            className="menu menu-sm dropdown-content  bg-base-200 rounded-box z-20 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-200 rounded-box z-20 mt-3 w-52 p-2 shadow"
           >
             {links}
           </ul>
         </div>
         <Link to={"/"} className="cursor-pointer sm:mr-5">
-          <ReadOnRouteLogo></ReadOnRouteLogo>
+          <ReadOnRouteLogo />
         </Link>
         {user ? (
-          <>
-            <div
-              className="tooltip tooltip-bottom"
-              data-tip={user.displayName || "User"}
-            >
-              {user.photoURL ? (
-                <img
-                  src={user.photoURL}
-                  alt="User Avatar"
-                  className="w-8 h-8 rounded-full border-2 border-white object-cover"
-                />
-              ) : (
-                <FaUserCircle size={28} className="text-base-content" />
-              )}
-            </div>
-          </>
+          <div className="tooltip tooltip-bottom" data-tip={user.displayName || "User"}>
+            {user.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt="User Avatar"
+                className="w-8 h-8 rounded-full border-2 border-white object-cover"
+              />
+            ) : (
+              <FaUserCircle size={28} className="text-base-content" />
+            )}
+          </div>
         ) : (
-          <>
-            <FaUserCircle size={28} className="text-base-content" />
-          </>
+          <FaUserCircle size={28} className="text-base-content" />
         )}
       </div>
+
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-base-content">{links}</ul>
       </div>
+
       <div className="navbar-end flex items-center gap-2">
         <label className="swap swap-rotate">
           <input

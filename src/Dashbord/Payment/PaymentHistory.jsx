@@ -38,7 +38,9 @@ const PaymentHistory = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">Payment History</h2>
+      <h2 className="text-4xl text-primary my-8 underline font-bold  text-center">
+        <span className="text-base-content">Payment</span>  <span className="text-base-content">History</span>
+      </h2>
 
       {/* ================= Mobile View (Cards) ================= */}
       <div className="grid gap-4 md:hidden">

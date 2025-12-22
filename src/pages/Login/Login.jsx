@@ -5,57 +5,49 @@ import ReadOnRouteLogo from "../../Components/Logo/ReadOnRouteLogo";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import useAuth from "../../Hooks/UseAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signInGoogle ,updateUserProfile } = useAuth();
+  const { signInGoogle, updateUserProfile, signInUser } = useAuth();
   const axiosSecure = useAxiosSecure();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleGoogleSignIn = () => {
     signInGoogle()
       .then((result) => {
-        console.log(result.user.photoURL);
-
-        // create user in the database
         const userInfo = {
           email: result.user.email,
           displayName: result.user.displayName,
           photoURL: result.user.photoURL,
         };
 
-        axiosSecure.post("/users", userInfo).then((res) => {
-          console.log("user data has been stored", res.data);
-          
+        axiosSecure.post("/users", userInfo).then(() => {
+          const userProfile = { photoURL: result.user.photoURL };
+          updateUserProfile(userProfile)
+            .then(() => {
+              Swal.fire({
+                icon: "success",
+                title: "Logged in successfully!",
+                text: `Welcome back, ${result.user.displayName}`,
+                timer: 2000,
+                showConfirmButton: false,
+              });
+              navigate(location.state || "/");
+            })
+            .catch((error) => console.log(error));
         });
-
-
-
-         const userProfile = {
-                            photoURL: result.user.photoURL 
-                        }
-
-                        updateUserProfile(userProfile)
-                            .then(() => {
-                                // console.log('user profile updated done.')
-                                navigate(location.state || '/');
-                            })
-                            .catch(error => console.log(error))
-
-
-
       })
       .catch((error) => {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Login failed",
+          text: error.message,
+        });
       });
-
-
-     
-
-
   };
 
-  const { signInUser } = useAuth();
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -63,32 +55,39 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     signInUser(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
+        Swal.fire({
+          icon: "success",
+          title: "Logged in successfully!",
+          text: `Welcome back, ${result.user.displayName || data.email}`,
+          timer: 2000,
+          showConfirmButton: false,
+        });
         navigate(location?.state || "/");
       })
       .catch((error) => {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Login failed",
+          text: error.message,
+        });
       });
   };
+
   return (
     <div className="flex">
       <div className="form flex-1">
         <div className="min-h-screen flex items-center justify-center bg-base-100">
           <div className="w-full max-w-md p-4">
-            {/* Logo */}
             <div className="flex items-center gap-2 mb-5">
               <Link to={"/"}>
-                <ReadOnRouteLogo></ReadOnRouteLogo>
+                <ReadOnRouteLogo />
               </Link>
             </div>
 
-            {/* Heading */}
-            <h1 className="text-4xl text-base-content font-bold mb-2">
-              Hello,
-            </h1>
+            <h1 className="text-4xl text-base-content font-bold mb-2">Hello,</h1>
             <h2 className="text-4xl text-base-content font-bold mb-3">
               Welcome Back
             </h2>
@@ -96,9 +95,7 @@ const Login = () => {
               Hey, welcome back to your special place
             </p>
 
-            {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              {/* Email */}
               <div>
                 <input
                   type="email"
@@ -107,50 +104,33 @@ const Login = () => {
                   {...register("email", { required: "Email is required" })}
                 />
                 {errors.email && (
-                  <p className="text-error text-sm mt-1">
-                    {errors.email.message}
-                  </p>
+                  <p className="text-error text-sm mt-1">{errors.email.message}</p>
                 )}
               </div>
 
-              {/* Password */}
               <div>
                 <input
                   type="password"
                   placeholder="Password"
                   className="input input-bordered w-full"
-                  {...register("password", {
-                    required: "Password is required",
-                  })}
+                  {...register("password", { required: "Password is required" })}
                 />
                 {errors.password && (
-                  <p className="text-error text-sm mt-1">
-                    {errors.password.message}
-                  </p>
+                  <p className="text-error text-sm mt-1">{errors.password.message}</p>
                 )}
               </div>
 
-              {/* Remember & Forgot */}
               <div className="flex items-center justify-between text-sm">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary checkbox-sm"
-                    {...register("remember")}
-                  />
-                  <span>Remember me</span>
-                </label>
-
-                <a href="#" className="text-primary hover:underline">
-                  Forgot Password?
-                </a>
+                <a className="text-primary hover:underline">Forgot Password?</a>
               </div>
 
-              {/* Button */}
               <button className="btn btn-primary w-full mt-4">Sign In</button>
             </form>
 
-            <button onClick={handleGoogleSignIn} className="btn w-full mt-4 bg-white text-black border-[#cfcbcb]">
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn w-full mt-4 bg-white text-black border-[#cfcbcb]"
+            >
               <svg
                 aria-label="Google logo"
                 width="16"
@@ -181,7 +161,6 @@ const Login = () => {
               Login with Google
             </button>
 
-            {/* Footer */}
             <p className="text-sm text-center mt-4">
               Don't have an account?{" "}
               <Link

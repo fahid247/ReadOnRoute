@@ -58,7 +58,7 @@ const LatestBooks = () => {
   };
 
   return (
-    <section className="py-16 bg-base-300">
+    <section className="py-16 bg-base-200 rounded-sm">
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-primary text-[clamp(2rem,3vw,3.25rem)]">Latest Books</h2>

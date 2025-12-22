@@ -9,7 +9,7 @@ const MyProfile = () => {
   console.log(user);
 
   if (loading) {
-    return <Loading></Loading>
+    return <Loading></Loading>;
   }
 
   if (!user) {
@@ -24,27 +24,32 @@ const MyProfile = () => {
   }
 
   return (
-    <section className="min-h-screen bg-base-300  mx-auto p-5 flex justify-center items-center">
-      <div className="bg-white shadow-xl rounded-xl p-8 max-w-md w-full text-center">
-        <div className="flex justify-center mb-6">
-          <img
-            src={user.photoURL}
-            alt="User Avatar"
-            className="w-32 h-32 rounded-full object-cover border-4 border-primary"
-          />
+    <div>
+         <h2 className="text-4xl text-primary my-8 underline font-bold  text-center">
+        <span className="text-base-content">My</span>  <span className="text-base-content">Profile</span>
+      </h2>
+      <section className=" bg-base-300  mx-auto p-2 flex justify-center items-center">
+        <div className="bg-white shadow-xl rounded-xl p-8 max-w-md w-full text-center">
+          <div className="flex justify-center mb-6">
+            <img
+              src={user.photoURL}
+              alt="User Avatar"
+              className="w-32 h-32 rounded-full object-cover border-4 border-primary"
+            />
+          </div>
+
+          <h2 className="text-2xl font-bold mb-2">{user.displayName}</h2>
+          <p className="text-gray-600 mb-6">{user.email}</p>
+
+          <button
+            onClick={() => navigate("/dashboard/update-profile")}
+            className="btn btn-primary w-full"
+          >
+            Update Profile
+          </button>
         </div>
-
-        <h2 className="text-2xl font-bold mb-2">{user.displayName}</h2>
-        <p className="text-gray-600 mb-6">{user.email}</p>
-
-        <button
-          onClick={() => navigate("/dashboard/update-profile")}
-          className="btn btn-primary w-full"
-        >
-          Update Profile
-        </button>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
