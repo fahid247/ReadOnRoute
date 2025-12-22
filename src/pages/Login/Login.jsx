@@ -173,8 +173,10 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="picture flex-1 p-3 flex justify-center items-center bg-base-100">
+      <div className="hidden md:block">
+        <div className=" picture flex-1 p-3 flex justify-center items-center bg-base-100">
         <img src={image} className="max-h-[92vh] rounded-2xl mx-auto" />
+      </div>
       </div>
     </div>
   );

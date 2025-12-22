@@ -55,8 +55,8 @@ const AllUsers = () => {
 
   return (
     <div className="p-4 md:p-6">
-      <h2 className="text-2xl font-bold mb-6 text-center md:text-left">
-        All Registered Users
+      <h2 className="text-4xl text-primary underline font-bold mb-8 text-center">
+        <span className="text-base-content">All</span> <span className="text-primary">Registered</span> <span className="text-base-content">Users</span>
       </h2>
 
       {/* Desktop Table */}

@@ -9,10 +9,11 @@ import { Link, NavLink, Outlet } from "react-router";
 import UseRole from "../../Hooks/UseRole";
 import { FaBookBookmark } from "react-icons/fa6";
 import { TbJewishStarFilled } from "react-icons/tb";
+import Loading from "../../Components/Loading/Loading";
 
 const DashboardLayout = () => {
-  const { role } = UseRole();
-  console.log(role);
+  const { role , roleLoading } = UseRole();
+  //console.log(role);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -41,24 +42,12 @@ const DashboardLayout = () => {
             </svg>
           </label>
           <div className="px-4">
-            {role === "user" && (
+           
+            
+            { roleLoading ? <Loading></Loading> :(
               <>
-                <h1 className="text-base-content  text-[clamp(2rem,3.5vw,3.75rem)] font-bold">
-                  User Dashboard
-                </h1>
-              </>
-            )}
-            {role === "librarian" && (
-              <>
-                <h1 className="text-base-content  text-[clamp(2rem,3.5vw,3.75rem)] font-bold">
-                  Librarian Dashboard
-                </h1>
-              </>
-            )}
-            {role === "admin" && (
-              <>
-                <h1 className="text-base-content text-[clamp(2rem,3.5vw,3.75rem)] font-bold">
-                  Admin Dashboard
+                <h1 className="text-base-content capitalize text-[clamp(2rem,3.5vw,3.75rem)] font-bold">
+                  {role} Dashboard
                 </h1>
               </>
             )}

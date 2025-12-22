@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/allbooks',
-                Component: AllBooks
+                element:<PrivateRoute><AllBooks></AllBooks></PrivateRoute>
             },
             {
                 path:'/book-details/:id',

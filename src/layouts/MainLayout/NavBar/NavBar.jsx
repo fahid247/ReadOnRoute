@@ -53,13 +53,9 @@ const NavBar = () => {
       <li>
         <NavLink to={"/allbooks"}>Books</NavLink>
       </li>
-      {user && (
-        <>
-          <li>
-            <NavLink to={"/dashboard"}>Dashboard</NavLink>
-          </li>
-        </>
-      )}
+      <li>
+        <NavLink to={"/dashboard"}>Dashboard</NavLink>
+      </li>
     </>
   );
 
@@ -94,7 +90,10 @@ const NavBar = () => {
           <ReadOnRouteLogo />
         </Link>
         {user ? (
-          <div className="tooltip tooltip-bottom" data-tip={user.displayName || "User"}>
+          <div
+            className="tooltip tooltip-bottom"
+            data-tip={user.displayName || "User"}
+          >
             {user.photoURL ? (
               <img
                 src={user.photoURL}

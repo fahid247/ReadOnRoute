@@ -57,7 +57,9 @@ const LibrarianOrders = () => {
 
   return (
     <section className="p-4 md:p-6">
-      <h2 className="text-2xl font-bold mb-6">Librarian Orders</h2>
+      <h2 className="text-4xl text-primary my-8 underline font-bold  text-center">
+        <span className="text-base-content">Librarian</span>  <span className="text-base-content">Orders</span>
+      </h2>
 
       {/* ================= DESKTOP TABLE ================= */}
       <div className="hidden md:block overflow-x-auto">

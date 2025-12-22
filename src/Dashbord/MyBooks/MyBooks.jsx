@@ -35,7 +35,9 @@ const MyBooks = () => {
 
   return (
     <section className="p-6">
-      <h2 className="text-2xl font-bold mb-6">My Added Books</h2>
+      <h2 className="text-4xl text-primary underline font-bold mb-8 text-center">
+        <span className="text-base-content">My</span> <span className="text-primary">Added</span> <span className="text-base-content">Books</span>
+      </h2>
 
       {books.length === 0 ? (
         <p>You haven't added any books yet.</p>

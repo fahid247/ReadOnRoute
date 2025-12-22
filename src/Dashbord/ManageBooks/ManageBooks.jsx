@@ -62,7 +62,9 @@ const {
 
   return (
     <div className="p-4 md:p-6">
-        <h1 className="text-2xl font-bold mb-2">Manage Books</h1>
+        <h2 className="text-4xl text-primary my-8 underline font-bold  text-center">
+        <span className="text-base-content">Manage</span>  <span className="text-base-content">Books</span>
+      </h2>
       <h2 className="text-xl font-medium mb-6">
         Total Books ({books.length})
       </h2>
