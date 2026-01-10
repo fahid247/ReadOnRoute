@@ -35,7 +35,7 @@ const Coverage = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-12">
+    <section className="bg-base-200 max-w-7xl mx-auto px-4 py-12">
       {/* Header */}
       <div className="text-center mb-10">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-800">

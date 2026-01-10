@@ -51,7 +51,7 @@ const features = [
 const WhyChoose = () => {
     const navigate = useNavigate();
   return (
-    <section className="max-w-7xl mx-auto px-4 py-16">
+    <section className="max-w-7xl bg-base-200 mx-auto px-4 py-16">
       {/* Header */}
       <div className="text-center mb-14">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-800">

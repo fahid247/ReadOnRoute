@@ -1,146 +1,86 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import image1 from "../../assets/daria-nepriakhina-xY55bL5mZAM-unsplash.jpg";
-import image2 from "../../assets/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg";
-import image3 from "../../assets/susan-q-yin-2JIvboGLeho-unsplash.jpg";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { useNavigate } from "react-router";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Autoplay } from 'swiper/modules'
+import "animate.css";
 
-// Import required modules
-import { Pagination, Navigation } from "swiper/modules";
-import { ParallaxBanner, ParallaxProvider } from "react-scroll-parallax";
-import { useNavigate } from "react-router";
+// Import images
+import image1 from "../../assets/daria-nepriakhina-xY55bL5mZAM-unsplash.jpg";
+import image2 from "../../assets/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg";
+import image3 from "../../assets/susan-q-yin-2JIvboGLeho-unsplash.jpg";
 
 const Banner = () => {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const slides = [
+    {
+      image: image1,
+      title: "Your Library, Delivered to Your Doorstep",
+      subtitle:
+        "Order, track, and return books from your favorite libraries — all from one platform.",
+    },
+    {
+      image: image2,
+      title: "Designed for Students, Researchers & Readers",
+      subtitle:
+        "Access academic and general books from trusted libraries without travel or waiting lines.",
+    },
+    {
+      image: image3,
+      title: "Empowering Libraries with Modern Delivery Tools",
+      subtitle:
+        "Manage books, track orders, and serve readers efficiently through BookCourier.",
+    },
+  ];
+
   return (
-    <ParallaxProvider>
-      <div className=" py-8 ">
-        <div className="h-screen bg-black text-white">
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={30}
-            loop={true}
-            autoplay={{delay:2500 , pauseOnMouseEnter:true}}
-            pagination={{ clickable: true }}
-            navigation={true}
-            
-            modules={[Pagination, Navigation,Autoplay]}
-            className="w-full h-full "
-          >
-            <SwiperSlide>
-              <div className="relative w-full h-full">
-                <ParallaxBanner
-                  layers={[
-                    {
-                      image: image1,
-                      speed: -20,
-                      children: (
-                        <div className="absolute inset-0 bg-black/50"></div>
-                      ),
-                    },
-                    {
-                      speed: -15,
-                      children: (
-                        <div className="absolute inset-0  flex justify-center items-center">
-                          <div className="text-center">
-                            <h1 className=" text-[#F8FAFC] font-bold animate__animated animate__fadeInDown text-2xl sm:text-4xl md:text-6xl">
-                              “Your Library, Delivered to Your Doorstep”
-                            </h1>
-                            <h4 className="text-[#E5E7EB] text-sm sm:text-lg md:text-xl font-bold animate__animated animate__fadeInUp w-2/3 mx-auto mt-5">
-                              Order, track, and return books from your favorite
-                              libraries — all from one platform.
-                            </h4>
-                            <button onClick={()=>{navigate('/allbooks')}} className="bg-secondary-content  hover:bg-primary cursor-pointer text-white font-semibold px-6 py-3 rounded-full mt-5 transition">
-                              All Books
-                            </button>
-                          </div>
-                        </div>
-                      ),
-                    },
-                  ]}
-                  className="h-full w-full"
-                />
+    <div className=" bg-base-200">
+      <div className="h-[70vh] w-full relative">
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={0}
+          loop={true}
+          autoplay={{ delay: 3000, pauseOnMouseEnter: true }}
+          pagination={{ clickable: true }}
+          navigation={true}
+          modules={[Pagination, Navigation, Autoplay]}
+          className="h-full w-full"
+        >
+          {slides.map((slide, idx) => (
+            <SwiperSlide key={idx}>
+              {/* Background image */}
+              <div
+                className="h-full w-full bg-cover bg-center relative"
+                style={{ backgroundImage: `url(${slide.image})` }}
+              >
+                {/* Overlay for readability */}
+                <div className="absolute inset-0 bg-black/50 flex justify-center items-center">
+                  <div className="text-center text-white max-w-5xl px-4">
+                    <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold animate__animated animate__fadeInDown">
+                      {slide.title}
+                    </h1>
+                    <p className="mt-4 text-sm sm:text-lg md:text-xl font-medium animate__animated animate__fadeInUp">
+                      {slide.subtitle}
+                    </p>
+                    <button
+                      onClick={() => navigate("/allbooks")}
+                      className="mt-6 bg-secondary-content hover:bg-primary text-white font-semibold px-6 py-3 rounded-full transition-all duration-300"
+                    >
+                      All Books
+                    </button>
+                  </div>
+                </div>
               </div>
             </SwiperSlide>
-            <SwiperSlide>
-              <div className="relative w-full h-full">
-                <ParallaxBanner
-                  layers={[
-                    {
-                      image: image2,
-                      speed: -20,
-                      children: (
-                        <div className="absolute inset-0 bg-black/50"></div>
-                      ),
-                    },
-                    {
-                      speed: -15,
-                      children: (
-                        <div className="absolute inset-0  flex justify-center items-center">
-                          <div className="text-center">
-                            <h1 className=" text-[#F8FAFC] font-bold animate__animated animate__fadeInDown text-2xl sm:text-4xl md:text-6xl">
-                              “Designed for Students, Researchers & Readers”
-                            </h1>
-                            <h4 className="text-[#E5E7EB] text-sm sm:text-lg md:text-xl font-bold animate__animated animate__fadeInUp w-2/3 mx-auto mt-5">
-                              Access academic and general books from trusted libraries
-                    without travel or waiting lines.
-                            </h4>
-                            <button onClick={()=>{navigate('/allbooks')}} className="bg-secondary-content  hover:bg-primary cursor-pointer text-white font-semibold px-6 py-3 rounded-full mt-5 transition">
-                              All Books
-                            </button>
-                          </div>
-                        </div>
-                      ),
-                    },
-                  ]}
-                  className="h-full w-full"
-                />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="relative w-full h-full">
-                <ParallaxBanner
-                  layers={[
-                    {
-                      image: image3,
-                      speed: -20,
-                      children: (
-                        <div className="absolute inset-0 bg-black/50"></div>
-                      ),
-                    },
-                    {
-                      speed: -15,
-                      children: (
-                        <div className="absolute inset-0  flex justify-center items-center">
-                          <div className="text-center">
-                            <h1 className=" text-[#F8FAFC] font-bold animate__animated animate__fadeInDown text-2xl sm:text-4xl md:text-6xl">
-                              “Empowering Libraries with Modern Delivery Tools”
-                            </h1>
-                            <h4 className="text-[#E5E7EB] text-sm sm:text-lg md:text-xl font-bold animate__animated animate__fadeInUp w-2/3 mx-auto mt-5">
-                               Manage books, track orders, and serve readers efficiently through BookCourier.
-                            </h4>
-                            <button onClick={()=>{navigate('/allbooks')}} className="bg-secondary-content  hover:bg-primary cursor-pointer text-white font-semibold px-6 py-3 rounded-full mt-5 transition">
-                              All Books
-                            </button>
-                          </div>
-                        </div>
-                      ),
-                    },
-                  ]}
-                  className="h-full w-full"
-                />
-              </div>
-            </SwiperSlide>
-            
-          </Swiper>
-        </div>
+          ))}
+        </Swiper>
       </div>
-    </ParallaxProvider>
+    </div>
   );
 };
 

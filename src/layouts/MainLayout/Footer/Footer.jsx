@@ -15,7 +15,7 @@ const Footer = () => {
         
         {/* Brand */}
         <div>
-            <ReadOnRouteLogo></ReadOnRouteLogo>
+            <ReadOnRouteLogo width={120}></ReadOnRouteLogo>
           <h2 className="text-xl font-bold mb-3">ReadOnRoute</h2>
           <p className="text-sm text-gray-500">
             Discover, order, and track your favorite books with ease.
