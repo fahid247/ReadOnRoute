@@ -3,15 +3,17 @@ import { Link, NavLink } from "react-router";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import {
-  FaBookOpen,
   FaHome,
   FaUserCircle,
   FaTachometerAlt,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { IoBookOutline, IoHomeOutline, IoInformationCircleOutline } from "react-icons/io5";
 import ReadOnRouteLogo from "../../../Components/Logo/ReadOnRouteLogo";
 import useAuth from "../../../Hooks/UseAuth";
 import Swal from "sweetalert2";
+import { MdOutlineConnectWithoutContact, MdOutlineDashboard } from "react-icons/md";
+import { PiHandTap } from "react-icons/pi";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
@@ -98,19 +100,37 @@ const NavBar = () => {
           >
             <li>
               <Link to="/">
-                <FaHome className="inline mr-2" />
+                <IoHomeOutline  className="inline mr-2" />
                 Home
               </Link>
             </li>
             <li>
               <Link to="/allbooks">
-                <FaBookOpen className="inline mr-2" />
+                <IoBookOutline  className="inline mr-2" />
                 Books
               </Link>
             </li>
             <li>
+              <Link to="/aboutus">
+                <IoInformationCircleOutline className="inline mr-2" />
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link to="/contactus">
+                <MdOutlineConnectWithoutContact  className="inline mr-2" />
+                Contact Us 
+              </Link>
+            </li>
+            <li>
+              <Link to="/howtouse">
+                <PiHandTap   className="inline mr-2" />
+                How to Use 
+              </Link>
+            </li>
+            <li>
               <Link to="/dashboard">
-                <FaTachometerAlt className="inline mr-2" />
+                <MdOutlineDashboard  className="inline mr-2" />
                   Dashboard
               </Link>
             </li>
@@ -146,9 +166,12 @@ const NavBar = () => {
       {/* ================= Center / Desktop Menu ================= */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal text-base-content gap-2">
-          {navItem("/", "Home", FaHome)}
-          {navItem("/allbooks", "Books", FaBookOpen)}
-          {navItem("/dashboard", "Dashboard", FaTachometerAlt)}
+          {navItem("/", "Home", IoHomeOutline )}
+          {navItem("/allbooks", "Books", IoBookOutline )}
+          {navItem("/aboutus", "About Us", IoInformationCircleOutline )}
+          {navItem("/contactus", "Contact Us", MdOutlineConnectWithoutContact  )}
+          {navItem("/howtouse", "How to Use", PiHandTap  )}
+          {navItem("/dashboard", "Dashboard", MdOutlineDashboard )}
         </ul>
       </div>
 

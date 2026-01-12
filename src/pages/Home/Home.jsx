@@ -5,6 +5,11 @@ import Coverage from '../../Components/Coverage/Coverage';
 import WhyChoose from '../../Components/WhyChoose/WhyChoose';
 import TrustedBy from '../../Components/TrustedBy/TrustedBy';
 import QualityTrust from '../../Components/QualityTrust/QualityTrust';
+import Features from '../../Components/Features/Features';
+import Services from '../../Components/Services/Services';
+import Highlights from '../../Components/Highlights/Highlights';
+import Newsletter from '../../Components/NewsLetter/NewsLetter';
+import FAQ from '../../Components/FAQ/FAQ';
 
 
 const Home = () => {
@@ -14,8 +19,13 @@ const Home = () => {
             <LatestBooks></LatestBooks>
             <Coverage></Coverage>
             <WhyChoose></WhyChoose>
+            <Features></Features>
+            <Highlights></Highlights>
             <QualityTrust></QualityTrust>
             <TrustedBy></TrustedBy>
+            <Services></Services>
+            <Newsletter></Newsletter>
+            <FAQ></FAQ>
         </div>
     );
 };

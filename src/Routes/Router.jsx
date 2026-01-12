@@ -23,6 +23,10 @@ import EditBook from "../Dashbord/EditBook/EditBook";
 import LibrarianOrders from "../Dashbord/LibrarianOrders/LibrarianOrders";
 import AdminRoute from "./AdminRoute";
 import MyWishList from "../Dashbord/MyWishList/MyWishList";
+import AboutUs from "../pages/AboutUs.jsx/AboutUs";
+import ContactUs from "../pages/ContactUs/ContactUs";
+import HowToUse from "../pages/HowToUse/HowToUse";
+
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +44,18 @@ export const router = createBrowserRouter([
             {
                 path:'/book-details/:id',
                 element: <PrivateRoute><BookDetails></BookDetails></PrivateRoute>
+            },
+            {
+                path:'/aboutus',
+                Component: AboutUs
+            },
+            {
+                path:'/contactus',
+                Component: ContactUs
+            },
+            {
+                path:'/howtouse',
+                Component:HowToUse
             }
         ]
     },

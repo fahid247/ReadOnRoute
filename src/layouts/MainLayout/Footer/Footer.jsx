@@ -10,7 +10,7 @@ import ReadOnRouteLogo from "../../../Components/Logo/ReadOnRouteLogo";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-100 text-base-content rounded-sm mt-16 ">
+    <footer className="bg-base-100 text-base-content rounded-sm  ">
       <div className="max-w-7xl mx-auto px-6 py-12 grid gap-8 sm:grid-cols-2 md:grid-cols-4">
         
         {/* Brand */}
@@ -23,8 +23,8 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className="footer-title text-primary font-bold inter">Quick Links</h3>
-          <ul className="space-y-2 text-sm playfair">
+          <h3 className="footer-title text-primary font-bold inter ">Quick Links</h3>
+          <ul className="space-y-2 text-sm playfair underline">
             <li><a className="link link-hover" href="/">Home</a></li>
             <li><a className="link link-hover" href="/allbooks">Books</a></li>
             <li><a className="link link-hover" href="/dashboard">Dashboard</a></li>

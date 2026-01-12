@@ -59,12 +59,12 @@ const AllBooks = () => {
   }
 
   return (
-    <section className="py-20 bg-base-200 min-h-screen">
+    <section className="py-20 bg-base-200 min-h-screen inter">
       <div className="container mx-auto px-6">
         {/* ================= Header ================= */}
         <div className="text-center mb-12">
-          <h2 className="text-[clamp(2.2rem,3vw,3rem)] font-bold text-primary">
-            {user.role === "librarian" ? "My Books" : "All Books"}
+          <h2 className="text-[clamp(2.2rem,3vw,3rem)] font-bold text-primary playfair">
+            All Books
           </h2>
           <p className="text-base-content/70 mt-3 max-w-2xl mx-auto">
             Browse our curated collection of books from trusted librarians
@@ -97,7 +97,7 @@ const AllBooks = () => {
 
         {/* ================= Books Grid ================= */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 inter"
           variants={containerVariants}
           initial="hidden"
           animate="visible"

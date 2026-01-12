@@ -87,7 +87,7 @@ const WhyChoose = () => {
       </motion.div>
 
       {/* CTA */}
-      <div className="mt-20 text-center">
+      <div className="mt-8 text-center">
         <motion.h3
           className="text-2xl playfair md:text-3xl font-semibold text-primary mb-4"
           initial={{ opacity: 0, y: 20 }}
