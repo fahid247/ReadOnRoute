@@ -3,9 +3,10 @@ import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { useNavigate } from "react-router";
 import useAuth from "../../Hooks/UseAuth";
 import Loading from "../../Components/Loading/Loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import UseRole from "../../Hooks/UseRole";
 
 const containerVariants = {
   hidden: {},
@@ -28,35 +29,36 @@ const cardVariants = {
 };
 
 const AllBooks = () => {
+  const role = UseRole();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useAuth();
 
   const [searchText, setSearchText] = useState("");
   const [sortOption, setSortOption] = useState("");
+  const [page, setPage] = useState(1);
 
-  const { data: books = [], isLoading } = useQuery({
-    queryKey: ["AllBooks"],
+  const limit = 8;
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["AllBooks", page, searchText, sortOption],
     enabled: !!user,
     queryFn: async () => {
-      const res = await axiosSecure.get("/AllBooks");
+      const res = await axiosSecure.get(
+        `/AllBooks?page=${page}&limit=${limit}&search=${searchText}&sort=${sortOption}`
+      );
       return res.data;
     },
   });
 
+  useEffect(() => {
+    setPage(1);
+  }, [searchText, sortOption]);
+
   if (loading || isLoading) return <Loading />;
 
-  /* ================= Filter ================= */
-  let filteredBooks = books.filter((book) =>
-    book.name.toLowerCase().includes(searchText.toLowerCase())
-  );
-
-  /* ================= Sort ================= */
-  if (sortOption === "price") {
-    filteredBooks.sort((a, b) => a.price - b.price);
-  } else if (sortOption === "pages") {
-    filteredBooks.sort((a, b) => a.pages - b.pages);
-  }
+  const books = data?.books || [];
+  const totalPages = Math.ceil((data?.total || 0) / limit);
 
   return (
     <section className="py-20 bg-base-200 min-h-screen inter">
@@ -64,7 +66,7 @@ const AllBooks = () => {
         {/* ================= Header ================= */}
         <div className="text-center mb-12">
           <h2 className="text-[clamp(2.2rem,3vw,3rem)] font-bold text-primary playfair">
-            All Books
+            {role.role === "librarian" ? "My Books" : "All Books"}
           </h2>
           <p className="text-base-content/70 mt-3 max-w-2xl mx-auto">
             Browse our curated collection of books from trusted librarians
@@ -102,15 +104,14 @@ const AllBooks = () => {
           initial="hidden"
           animate="visible"
         >
-          {filteredBooks.length > 0 ? (
-            filteredBooks.map((book) => (
+          {books.length > 0 ? (
+            books.map((book) => (
               <motion.article
                 key={book._id}
-                className="bg-base-100 rounded-xl  dark:border dark:border-base-300 overflow-hidden cursor-pointer"
+                className="bg-base-100 rounded-xl dark:border dark:border-base-300 overflow-hidden cursor-pointer"
                 variants={cardVariants}
                 whileHover="hover"
               >
-                {/* Image */}
                 <div className="relative overflow-hidden">
                   <motion.img
                     src={book.image}
@@ -123,20 +124,23 @@ const AllBooks = () => {
                   <div className="absolute inset-0 bg-black/10 opacity-0 hover:opacity-100 transition" />
                 </div>
 
-                {/* Content */}
                 <div className="p-6 space-y-2">
                   <h3 className="text-xl font-semibold line-clamp-1 hover:text-primary transition">
                     {book.name}
                   </h3>
 
-                  <p className="text-sm text-base-content/70">{book.author}</p>
+                  <p className="text-sm text-base-content/70">
+                    {book.author}
+                  </p>
 
                   <div className="flex justify-between text-sm text-base-content/70">
                     <span>{book.category}</span>
                     <span>{book.pages} pages</span>
                   </div>
 
-                  <p className="text-sm font-medium">Price: ৳{book.price}</p>
+                  <p className="text-sm font-medium">
+                    Price: ৳{book.price}
+                  </p>
 
                   <button
                     onClick={() => navigate(`/book-details/${book._id}`)}
@@ -153,6 +157,39 @@ const AllBooks = () => {
             </p>
           )}
         </motion.div>
+
+        {/* ================= Pagination ================= */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-16 gap-2">
+            <button
+              className="btn btn-sm"
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+            >
+              Prev
+            </button>
+
+            {[...Array(totalPages).keys()].map((num) => (
+              <button
+                key={num}
+                onClick={() => setPage(num + 1)}
+                className={`btn btn-sm ${
+                  page === num + 1 ? "btn-primary" : ""
+                }`}
+              >
+                {num + 1}
+              </button>
+            ))}
+
+            <button
+              className="btn btn-sm"
+              disabled={page === totalPages}
+              onClick={() => setPage(page + 1)}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

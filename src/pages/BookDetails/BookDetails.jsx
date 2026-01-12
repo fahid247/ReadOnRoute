@@ -101,7 +101,7 @@ const BookDetails = () => {
   };
 
   return (
-    <section className="min-h-screen bg-base-200 py-16">
+    <section className="min-h-screen bg-base-200 py-16 inter">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
         
         {/* ================= Image (From Top) ================= */}
@@ -127,7 +127,7 @@ const BookDetails = () => {
           className="space-y-6"
         >
           <div>
-            <h1 className="text-4xl font-bold text-base-content">
+            <h1 className="text-4xl font-bold text-base-content playfair">
               {book.name}
             </h1>
             <p className="text-lg text-base-content/70 mt-1">
@@ -154,7 +154,7 @@ const BookDetails = () => {
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 playfair">
             <button
               className="btn btn-primary px-8"
               onClick={() =>
